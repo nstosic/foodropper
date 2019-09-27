@@ -1,2 +1,3 @@
-# foodropper
-2D hypercasual game developed using Haxe
+# Foodropper
+
+Foodropper is a hypercasual 2D game created using Haxe.
