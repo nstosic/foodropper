@@ -1,3 +1,11 @@
+.DS_Store
+
+# Kha
+build/
+khafile.js
+korefile.js
+
+# Default Haxe gitignore
 tests/unit/report/
 tests/unit/.temp/
 tests/unit/bin/
