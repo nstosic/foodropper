@@ -1,4 +1,4 @@
 -cp Sources
 -D analyzer-optimize
--main Main
+-main rs.co.estel.foodropper.Main
 --interp
