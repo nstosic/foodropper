@@ -1,4 +1,7 @@
 package rs.co.estel.foodropper;
+import rs.co.estel.foodropper.control.Event;
+import rs.co.estel.foodropper.graphics.Scene;
+import rs.co.estel.foodropper.graphics.MainMenuScene;
 
 import kha.Framebuffer;
 import kha.Assets;
@@ -15,7 +18,13 @@ class Project {
 		this.scenes = new List<Scene>();
 	}
 
+	private function dispatchEvents(): List<Event> {
+		var events = new List<Event>();
+		return events;
+	}
+
 	public function update(): Void {
+		var events = dispatchEvents();
 		if (this.onMainMenu) {
 			this.mainMenuScene.onUpdate();
 		} else {
