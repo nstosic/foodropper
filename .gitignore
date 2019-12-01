@@ -17,3 +17,5 @@ tests/RunTravis.n
 *.diff
 *.hxproj
 .unittest
+
+Assets/
