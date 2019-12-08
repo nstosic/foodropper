@@ -6,9 +6,10 @@ class World {
 	// Physics
 	public static var GravityEnabled: Bool = true;
 	public static var Gravity: Float = 9.81 * Unit;
-	public static var InitialSpawnVelocity: Float = 1.0;
+	public static var InitialSpawnVelocity: Float = 1.0 * Unit;
 	// Clock
 	public static var InitialSpawnDelay: Int = 25;
 	public static var SpawnDecrementDelay: Int = 500;
-	
+	// Graphics
+	public static var BackgroundXVelocity: Float = 2.0;
 }
