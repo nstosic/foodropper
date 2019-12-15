@@ -18,7 +18,6 @@ class InteractiveScene extends Scene {
 	}
 
 	public override function onRender(g: kha.graphics2.Graphics) {
-		g.color = Color.Cyan;
 		var drawables = this.game.getDrawables();
 		for (drawable in drawables) {
 			g.fillCircle(drawable.getX(), drawable.getY(), 20);

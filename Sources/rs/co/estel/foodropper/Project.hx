@@ -1,9 +1,11 @@
 package rs.co.estel.foodropper;
 import rs.co.estel.foodropper.control.Event;
+import rs.co.estel.foodropper.game.World;
 import rs.co.estel.foodropper.graphics.BackgroundScene;
 import rs.co.estel.foodropper.graphics.InteractiveScene;
 import rs.co.estel.foodropper.graphics.MainMenuScene;
 import rs.co.estel.foodropper.graphics.Scene;
+import rs.co.estel.foodropper.introspection.Screen;
 
 import kha.Framebuffer;
 import kha.Assets;
@@ -27,8 +29,39 @@ class Project {
 	}
 
 	private function onNewGame() {
-		this.scenes.add(new BackgroundScene(null));
+		this.scenes.add(new BackgroundScene(
+			Assets.images.bg_layer_1,
+			Screen.getScreenWidth(),
+			Screen.getScreenHeight(),
+			0,
+			0,
+			1.0)
+		);
+		this.scenes.add(new BackgroundScene(
+			Assets.images.bg_layer_2,
+			Screen.getScreenWidth(),
+			Screen.getScreenHeight(),
+			0,
+			0,
+			2.0)
+		);
+		this.scenes.add(new BackgroundScene(
+			Assets.images.bg_layer_3,
+			Screen.getScreenWidth(),
+			Screen.getScreenHeight(),
+			0,
+			0,
+			3.0)
+		);
 		this.scenes.add(new InteractiveScene());
+		this.scenes.add(new BackgroundScene(
+			Assets.images.ground,
+			Screen.getScreenWidth(),
+			World.GroundHeight,
+			0,
+			Screen.getScreenHeight() - World.GroundHeight,
+			1.0)
+		);
 		this.onMainMenu = false;
 	}
 
