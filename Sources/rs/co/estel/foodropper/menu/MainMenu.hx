@@ -15,9 +15,11 @@ class MainMenu extends Menu {
 	private var textColor: Color = Color.White;
 	private var backgroundColor: Color = Color.Orange;
 	private var onMouseEvent: MouseEventListener;
+	private var onNewGameListener: Void->Void;
 
-	public function new() {
+	public function new(onNewGameListener: Void->Void) {
 		super();
+		this.onNewGameListener = onNewGameListener;
 		this.options.add(new MenuOption('New game', function () { this.onNewGame(); }));
 		this.options.add(new MenuOption('High score', function () { this.onHighScore(); }));
 		this.options.add(new MenuOption('Settings', function () { this.onSettings(); }));
@@ -35,6 +37,8 @@ class MainMenu extends Menu {
 
 	private function onNewGame() {
 		trace('onNewGame');
+		MouseController.getInstance().removeListener(this.onMouseEvent);
+		this.onNewGameListener();
 	}
 
 	private function onHighScore() {
@@ -48,6 +52,7 @@ class MainMenu extends Menu {
 	private function onExit() {
 		trace('onExit');
 		MouseController.getInstance().removeListener(this.onMouseEvent);
+		Main.exit(0);
 	}
 
 	public function draw(g: kha.graphics2.Graphics, menuWidth: Float) {

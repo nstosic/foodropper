@@ -11,8 +11,8 @@ class MainMenuScene extends Scene {
 	private var mainMenu: MainMenu;
 	private var screenWidth: Float;
 	
-	public function new() {
-		this.mainMenu = new MainMenu();
+	public function new(onNewGameListener: Void->Void) {
+		this.mainMenu = new MainMenu(onNewGameListener);
 		this.screenWidth = Screen.getScreenWidth();
 	}
 
