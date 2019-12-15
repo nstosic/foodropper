@@ -55,14 +55,10 @@ class MainMenu extends Menu {
 		Main.exit(0);
 	}
 
-	public function draw(g: kha.graphics2.Graphics, menuWidth: Float) {
+	public function draw(g: kha.graphics2.Graphics, menuOffsetY: Float, menuWidth: Float) {
 		var x = MainMenu.horizontalMenuPadding;
-		var y = MainMenu.verticalMenuPadding;
-		// Draw logo
-		var logoImage = Assets.images.logo;
-		g.drawImage(logoImage, (menuWidth - logoImage.width) / 2, y);
+		var y = menuOffsetY + MainMenu.verticalMenuPadding;
 		// Draw options
-		y = y + logoImage.height + MainMenu.verticalMenuPadding;
 		var menuOptionWidth = menuWidth - MainMenu.horizontalMenuPadding * 2;
 		for(option in this.options) {
 			option.setX(x);

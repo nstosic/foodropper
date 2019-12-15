@@ -22,8 +22,12 @@ class MainMenuScene extends Scene {
 
 	public override function onRender(g: kha.graphics2.Graphics) {
 		g.clear(Color.Black);
+		// Draw logo
+		var logoImage = Assets.images.logo;
+		g.drawImage(logoImage, (this.screenWidth - logoImage.width) / 2, 16);
+		// Draw menu options
 		g.font = Assets.fonts.Caviar_Dreams_Bold;
 		g.fontSize = 22;
-		mainMenu.draw(g, this.screenWidth);
+		mainMenu.draw(g, logoImage.height, this.screenWidth);
 	}
 }
