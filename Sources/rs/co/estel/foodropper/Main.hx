@@ -17,4 +17,8 @@ class Main {
 			});
 		});
 	}
+
+	public static function exit(code: Int = 0) {
+		// Sys.exit(code);
+	}
 }
