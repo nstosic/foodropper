@@ -20,10 +20,10 @@ class MainMenu extends Menu {
 	public function new(onNewGameListener: Void->Void) {
 		super();
 		this.onNewGameListener = onNewGameListener;
-		this.options.add(new MenuOption('New game', function () { this.onNewGame(); }));
-		this.options.add(new MenuOption('High score', function () { this.onHighScore(); }));
-		this.options.add(new MenuOption('Settings', function () { this.onSettings(); }));
-		this.options.add(new MenuOption('Exit', function () { this.onExit(); }));
+		this.options.add(new MenuOption('New game', this.onNewGame));
+		this.options.add(new MenuOption('High score', this.onHighScore));
+		this.options.add(new MenuOption('Settings', this.onSettings));
+		this.options.add(new MenuOption('Exit', this.onExit));
 		this.onMouseEvent = new MouseEventListener(MouseEventListener.DOWN, function (event: MouseEvent) {
 			for (option in this.options) {
 				if (option.isWithinBounds(event.getX(), event.getY())) {
