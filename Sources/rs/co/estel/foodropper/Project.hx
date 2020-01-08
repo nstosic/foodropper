@@ -35,7 +35,7 @@ class Project {
 			Screen.getScreenHeight(),
 			0,
 			0,
-			1.0)
+			3.0)
 		);
 		this.scenes.add(new BackgroundScene(
 			Assets.images.bg_layer_2,
@@ -51,7 +51,7 @@ class Project {
 			Screen.getScreenHeight(),
 			0,
 			0,
-			3.0)
+			1.0)
 		);
 		this.scenes.add(new InteractiveScene());
 		this.scenes.add(new BackgroundScene(
@@ -60,7 +60,7 @@ class Project {
 			World.GroundHeight,
 			0,
 			Screen.getScreenHeight() - World.GroundHeight,
-			1.0)
+			4.0)
 		);
 		this.onMainMenu = false;
 	}
