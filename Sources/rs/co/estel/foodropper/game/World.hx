@@ -11,6 +11,6 @@ class World {
 	public static var InitialSpawnChance: Int = 85;
 	public static var InitialSpawnDelay: Int = 20;
 	// Graphics
-	public static var BackgroundXVelocity: Float = 2.0;
+	public static var BackgroundXVelocity: Float = 1.0;
 	public static var GroundHeight: Int = 120;
 }
