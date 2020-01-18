@@ -33,12 +33,12 @@ class InteractiveScene extends Scene {
 		g.opacity = 1.0;
 		var drawables = this.game.getDrawables();
 		for (drawable in drawables) {
-			g.fillCircle(drawable.getX(), drawable.getY(), 20);
+			g.drawImage(drawable.getSprite(), drawable.getX(), drawable.getY());
 		}
 		// Draw player
 		var player = this.game.getPlayer();
 		g.color = Color.Orange;
-		g.fillCircle(player.getX(), player.getY(), Player.ModelHeight);
+		g.drawImage(player.getSprite(), player.getX(), player.getY());
 		player.drawBars(g, this.barAreaX, this.barAreaY);
 		g.color = Color.White;
 		g.opacity = 1.0;

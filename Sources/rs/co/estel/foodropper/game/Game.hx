@@ -1,5 +1,6 @@
 package rs.co.estel.foodropper.game;
 
+import rs.co.estel.foodropper.model.Food;
 import rs.co.estel.foodropper.model.MovableShape;
 import rs.co.estel.foodropper.model.Player;
 import rs.co.estel.foodropper.model.Shape;
@@ -7,8 +8,10 @@ import rs.co.estel.foodropper.control.mouse.MouseController;
 import rs.co.estel.foodropper.control.mouse.MouseEvent;
 import rs.co.estel.foodropper.control.mouse.MouseEventListener;
 
+import kha.Assets;
+
 class Game {
-	private var spawns: List<MovableShape>;
+	private var spawns: List<Food>;
 	private var player: Player;
 	private var width: Float;
 	private var height: Float;
@@ -20,7 +23,7 @@ class Game {
 	private var onRight: Bool;
 
 	public function new(player: Player, screenWidth: Float, screenHeight: Float) {
-		this.spawns = new List<MovableShape>();
+		this.spawns = new List<Food>();
 		this.player = player;
 		this.width = screenWidth;
 		this.height = screenHeight;
@@ -58,7 +61,7 @@ class Game {
 			this.spawnCooldown = World.InitialSpawnDelay;
 			var x = 20 + Std.random(Std.int(this.width - 40));
 			var y = 0;
-			var newFood = new MovableShape(x, y, 0, World.InitialSpawnVelocity);
+			var newFood = new Food(x, y, 0, World.InitialSpawnVelocity, Assets.images.logo_min, 2.0, 2.0);
 			spawns.add(newFood);
 		}
 	}
@@ -70,14 +73,18 @@ class Game {
 		while(iter.hasNext()) {
 			var food = iter.next();
 			food.fall();
-			if (food.getY() + 20 >= this.height - World.GroundHeight) {
+			if (food.inCollision(this.player)) {
+				this.player.eat(food);
+				spawns.remove(food);
+			}
+			else if (food.getY() + 20 >= this.height - World.GroundHeight) {
 				spawns.remove(food);
 			}
 		}
 		this.player.pass();
 	}
 
-	public function getDrawables(): List<MovableShape> {
+	public function getDrawables(): List<Food> {
 		return this.spawns;
 	}
 
