@@ -2,12 +2,14 @@ package rs.co.estel.foodropper.model;
 
 import rs.co.estel.foodropper.game.World;
 
+import kha.Image;
+
 class MovableShape extends Shape {
 	private var vx: Float;
 	private var vy: Float;
 
-	public function new(x: Float = 0.0, y: Float = 0.0, vx: Float = 0.0, vy: Float = 0.0) {
-		super(x, y);
+	public function new(x: Float = 0.0, y: Float = 0.0, vx: Float = 0.0, vy: Float = 0.0, sprite: Image = null) {
+		super(x, y, sprite);
 		this.vx = vx;
 		this.vy = vy;
 	}
