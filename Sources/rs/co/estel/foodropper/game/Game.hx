@@ -16,6 +16,8 @@ class Game {
 	private var width: Float;
 	private var height: Float;
 	private var spawnCooldown: Int;
+	private var difficultyCooldown: Float = World.DifficultyCooldown;
+	public var inProgress: Bool = true;
 
 	// Input events
 	private var onJump: Bool;
@@ -67,6 +69,11 @@ class Game {
 	}
 
 	public function pass() {
+		this.difficultyCooldown--;
+		if (this.difficultyCooldown == 0) {
+			this.difficultyCooldown = World.DifficultyCooldown;
+			this.player.increaseDifficulty();
+		}
 		dispatchEvents();
 		spawn();
 		var iter = spawns.iterator();
@@ -82,6 +89,9 @@ class Game {
 			}
 		}
 		this.player.pass();
+		if (this.player.cholesterol >= 1.0 || this.player.hunger <= 0.0) {
+			gameOver();
+		}
 	}
 
 	public function getDrawables(): List<Food> {
@@ -90,5 +100,9 @@ class Game {
 
 	public function getPlayer(): Player {
 		return this.player;
+	}
+
+	private function gameOver() {
+		this.inProgress = false;
 	}
 }
