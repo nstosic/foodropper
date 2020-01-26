@@ -11,10 +11,10 @@ class Player extends MovableShape {
 	private var onGroundHeight: Float;
 
 	// Nutritive values
-	private var cholesterol: Float = 0.25 * World.Unit;
-	private var cholesterolRate: Float = 0.0006 / World.Unit;
-	private var hunger: Float = 0.5 - 0.1 * World.Unit;
-	private var hungerRate: Float = 0.0002 * World.Unit;
+	public var cholesterol: Float = 0.25 * World.Unit;
+	private var cholesterolRate: Float = World.DefaultCholesterolRate / World.Unit;
+	public var hunger: Float = 0.5 - 0.1 * World.Unit;
+	private var hungerRate: Float = World.DefaultHungerRate * World.Unit;
 
 	public function new() {
 		var x = (Screen.getScreenWidth() - Assets.images.player.width) / 2;
@@ -25,10 +25,13 @@ class Player extends MovableShape {
 	public function pass() {
 		this.x = this.x + this.vx;
 		this.y = this.y - this.vy;
-		this.hunger = this.hunger - this.hungerRate;
-		if (this.hunger <= 0.0) {
-			// Game over
+		if (this.y <= this.onGroundHeight) {
+			this.vy = this.vy - World.Gravity / World.GravityDecayFactor;
+		} else {
+			this.y = this.onGroundHeight;
+			this.vy = 0.0;
 		}
+		this.hunger = this.hunger - this.hungerRate;
 		if (this.cholesterol > 0.0) {
 			this.cholesterol = this.cholesterol - this.cholesterolRate;
 		}
@@ -36,10 +39,17 @@ class Player extends MovableShape {
 
 	public function eat(food: Food) {
 		this.hunger += (food.hunger / 100) * World.Unit;
+		if (this.hunger >= 1.0) {
+			this.hunger = 1.0;
+		}
 		this.cholesterol += (food.cholesterol / 100) / World.Unit;
 	}
 
 	public function drawBars(g: kha.graphics2.Graphics, x: Float, y: Float) {
+		// Debug only, draw metabolism rate
+		g.color = Color.White;
+		g.drawString(Std.string(this.cholesterolRate), x, y + 120);
+		g.drawString(Std.string(this.hungerRate), x, y + 132);
 		// Draw icon for cholesterol
 		g.color = Color.Blue;
 		g.drawRect(x, y + 24, 16, 80, 2.0);
@@ -56,7 +66,7 @@ class Player extends MovableShape {
 
 	public function onJump() {
 		if (this.getY() == this.onGroundHeight) {
-			this.vy = 5.0;
+			this.vy = World.InitialJumpVelocity;
 		}
 	}
 
@@ -66,5 +76,14 @@ class Player extends MovableShape {
 
 	public function onRight() {
 		this.vx = 5.0;
+	}
+
+	public function increaseDifficulty() {
+		if (this.hungerRate < World.MaxHungerRate) {
+			this.hungerRate = this.hungerRate * 1.1;
+		}
+		if (this.cholesterol > World.MinCholesterolRate) {
+			this.cholesterolRate = this.cholesterolRate / 1.1;
+		}
 	}
 }
